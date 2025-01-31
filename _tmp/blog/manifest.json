@@ -1,0 +1,22 @@
+{
+  "name": "Wilson Denis Arriola - Blog",
+  "short_name": "warriolBlog",
+  "description": "Wilson Denis ArriolaWeb  Blog",
+  "icons": [{
+			"src": "../app/img/logos/wda.png",
+			"sizes": "128x128"
+		}, {
+			"src": "../app/img/logos/wda.png",
+			"sizes": "144x144"
+		}, {
+			"src": "../app/img/logos/wda.png",
+			"sizes": "152x152"
+		},{
+			"src": "../app/img/logos/wda.png",
+			"sizes": "192x192"
+		}],
+	"start_url": "index.php",
+	"display": "standalone",
+	"background_color": "#3E4EB8",
+	"theme_color": "#2F3BA2"
+}

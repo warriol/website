@@ -1,0 +1,111 @@
+/*
+Theme Name: Twenty Sixteen Child
+Theme URI: https://wordpress.org/themes/twentysixteen/
+Template:     twentysixteen
+Version:      1.0.0
+Author: wilson denis arriola
+Author URI: http://wilsonarriola.byethost6.com
+Description: child
+Version: 1.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags:  blog
+Text Domain: twentysixteen
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+@import url("../twentysixteen/style.css");
+
+@media screen and (min-width: 56.875em) {
+	.widget {
+		font-size: 0.9rem;
+	}
+}
+.entry-footer, .entry-content {
+	font-size: 0.9rem;
+}
+
+#enlaceSlack img {
+	/* width:200px;
+	height: 60px; */
+}
+/*
+@media screen and (min-width: 61.5625em) {
+	body:not(.search-results) article:not(.type-page) .entry-footer
+	{
+	float: none;
+	margin-top: 1.5em;
+	width: 100%;
+	}
+	.single .byline, .full-size-link,
+	body.group-blog:not(.search-results) .byline,
+	body:not(.search-results) .entry-format,
+	body:not(.search-results) .cat-links,
+	body:not(.search-results) .tags-links,
+	body:not(.search-results) article:not(.sticky) .posted-on,
+	body:not(.search-results) article:not(.type-page) .comments-link,
+	body:not(.search-results) article:not(.type-page) .entry-footer .edit-link
+	{
+	display: inline;
+	}
+	body:not(.search-results) article:not(.type-page) .entry-footer > span:not(:last-child):after
+	{
+	display: inline;
+	}
+	body:not(.search-results) article:not(.type-page) .entry-content
+	{
+	float: none;
+	width: 100%;
+	}
+	body:not(.search-results) article:not(.type-page) .entry-footer .avatar
+	{
+	display: inline;
+	margin: auto 0.3em 1em auto;
+	width: 27px;
+	}
+}
+*/
+/* ocultar tags en post */
+body:not(.search-results) .tags-links {
+	display:none;
+}
+footer {
+	margin-top: 0 !important;
+}
+
+.site {
+	margin: 0 !important;
+}
+
+body:not(.custom-background-image)::after{
+	height:0px;
+}
+
+body {
+	background-color:#272d35;}
+/*
+.entry-title {
+	font-size: 40px;}
+.entry-footer {
+	font-size:13px;}
+.entry-content {
+	font-size:16px;}
+	*/
+.search-form label {
+	margin-bottom: 0 !important;}
+.search-field {
+	font-size: 23px !important;
+	width:100% !important;
+	height: 65px !important;}
+
+.entry-footer a:hover, .entry-footer a:focus {
+	text-decoration:none !important;
+	border: solid 1px #007acc;
+	border-radius:2px;
+	color: #007acc;
+	margin: 0 0.2307692308em 0.5384615385em 0;
+	padding: 0.5384615385em 0.4615384615em 0.4615384615em;
+}
+	

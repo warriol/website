@@ -1,0 +1,16 @@
+13/12/2017
+- crear un tema hijo para ir ajustando los valores del them para incrustarlo en mi web
+
+- creacin de carpeta en:
+	- blog/wp-content/{write-child}
+- dentro de esta carpeta creo dos archivos donde gaurdaré la información personalizada que persistirá a las actualizaciones del tema
+	- blog/wp-content/write-child/{style.css}
+		{Es importante respetar el encabezado del archivo y colocar los nombres correcto del tema padre, es sensible a mayusculas.}
+	- blog/wp-content/write-child/{functions.php}
+- copio los archivo de header y footer del tema a  la carpeta hijo
+	- blog/wp-content/write-child/{footer.php}
+	- blog/wp-content/write-child/{header.php}
+	
+*****************************************************************************************************************************************
+CON ESTO YA LOGRAMOS QUE FUNCIONE EL CAMBIO AL TEMA HIJO Y PODREMOS PERSONALZIARLO
+*****************************************************************************************************************************************

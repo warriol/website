@@ -1,0 +1,54 @@
+<?php
+	/*
+	*
+	* configuraciones generales
+	*
+	*/
+	
+	
+	// verifico el tipo de servidor que esta corriendo
+	if($_SERVER["SERVER_NAME"] == "localhost"){
+		// servidor local
+		$DB_host = "localhost";
+		$DB_user = "root";
+		$DB_pass = "";
+		$DB_name = "b6_3784887_sitio";
+		
+		$_URLBASE_ = "http://localhost/wda/htdocs/"; // . $_SERVER["REQUEST_URI"];
+	}else{
+		// servidor externo
+		$DB_host = "sql106.byethost6.com";
+		$DB_user = "b6_3784887";
+		$DB_pass = "wda43791";
+		$DB_name = "b6_3784887_sitio";
+		
+		$_URLBASE_ = "http://" . $_SERVER["SERVER_NAME"]. "/";
+	}
+
+	// conección con la base de datos
+	try
+	{
+		$DB_con = new PDO("mysql:host={$DB_host};dbname={$DB_name}",$DB_user,$DB_pass);
+		
+		$DB_con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	}
+	catch(PDOException $e)
+	{
+		$msj = $e->getMessage();
+		
+		header("Location: ".$_URLBASE_."/errores/index.php?msj=".$msj);
+	}
+
+	// incluyo la clase general
+	include_once './clases/class.wda.php';
+	$wda = new wda($DB_con);
+
+	// incluimos archivos de idioma
+	require('./app/idioma/idiomas.php'); 
+	
+	// definicmos variables globales
+	$lang = 'es';
+	if ( isset($_GET['lang']) ){
+		$lang = $_GET['lang'];
+	}
+?>

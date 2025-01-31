@@ -1,0 +1,25 @@
+<IfModule mod_rewrite.c>
+
+	RewriteEngine On
+
+	RewriteBase /wda
+
+</IfModule>
+
+DirectoryIndex index.php index.html index.htm
+ServerSignature On
+
+<Files "config.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>
+
+<Files "*.tpl">
+Order Allow,Deny
+Deny from All
+</Files>
