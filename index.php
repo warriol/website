@@ -1,35 +1,6 @@
 <?php
-    error_reporting(E_ALL);
-
-    ini_set('ignore_repeated_errors', true);
-    ini_set('display_errors', true);
-    ini_set('log_errors', true);
-    ini_set("error_log", "./php-error.log");
-
-    include_once 'autoload.php';
-
-	session_start();
-
-    if (!isset($_SESSION['iniciado'])) {
-        $_SESSION['iniciado'] = false;
-    }
-
-    if (isset($_GET['cerrar'])) {
-        session_destroy();
-        header('Location: index.php');
-    }
-
-    if ($_SESSION['iniciado']) {
-        $inicio = AuthService::getInstance('.env');
-        $_SESSION['nombre'] = $inicio->getEmail();
-        $inicio->iniciarSesionAPI();
-        $inicio->debug("Index", "Sesión activa: " . $_SESSION['iniciado'] . ' - nombre: ' .$_SESSION['nombre'] );
-    } else {
-        $publico = ControladorPublico::getInstance('.env');
-        $_SESSION['nombre'] = $publico->getSesionName();
-        $publico->mostrarFrmLogin();
-        $publico->debug("Index", "No hay sesión activa.");
-    }
+session_start();
+include('config/config.php');
 ?>
 <!DOCTYPE html>
 <html>
