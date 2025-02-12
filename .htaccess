@@ -1,7 +1,7 @@
 Options -Indexes
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteBase /wda
+	RewriteBase /website
 
 	RewriteCond %{SERVER_PORT} 80
 	RewriteCond %{HTTPS} !on

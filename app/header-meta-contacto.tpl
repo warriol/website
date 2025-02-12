@@ -1,7 +1,7 @@
 		<!-- Basic -->
 		<meta charset="utf-8">
         <!-- llamo a fucnion anonima en idioma/idioma.php -->
-		<title><?php echo __('tContacto', $lang) ?></title>
+		<title>Contacto</title>
         
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="author" content="Wilson Denis Arriola" />

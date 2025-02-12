@@ -1,5 +1,5 @@
 		<!-- favicon -->
-		<link rel="icon" href="<?php echo $_URLBASE_ ?>app/img/logos/wda.png" type="image/gif" sizes="32x32" /> 
+		<link rel="icon" href="<?php echo $_URLBASE_; ?>app/img/logos/wda.png" type="image/gif" sizes="32x32" />
         <link rel="manifest" href="<?php echo $_URLBASE_; ?>manifest.json">
 
 		<!-- Vendor CSS -->

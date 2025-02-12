@@ -1,0 +1,4 @@
+[31-Jan-2025 13:49:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "ControladorPublico" not found in J:\programas\xampp_warriol\htdocs\website\index.php:28
+Stack trace:
+#0 {main}
+  thrown in J:\programas\xampp_warriol\htdocs\website\index.php on line 28
