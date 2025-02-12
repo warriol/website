@@ -4,9 +4,9 @@ class wda
 {
 	private $db;
 	
-	function __construct($DB_con)
+	function __construct($DB_con = null)
 	{
-		$this->db = $DB_con;
+		//$this->db = $DB_con;
 	}
 
 	public function debug($var, $val = '-'){

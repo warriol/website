@@ -20,8 +20,8 @@
 
 	try
 	{
-		$DB_con = new PDO("mysql:host={$DB_host};dbname={$DB_name}",$DB_user,$DB_pass);
-		$DB_con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		//$DB_con = new PDO("mysql:host={$DB_host};dbname={$DB_name}",$DB_user,$DB_pass);
+		//$DB_con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 	catch(PDOException $e)
 	{
@@ -30,7 +30,8 @@
 	}
 
 	include_once './clases/class.wda.php';
-	$wda = new wda($DB_con);
+	//$wda = new wda($DB_con);
+    $wda = new wda($DB_con);
 
 	require('./app/idioma/idiomas.php');
 	

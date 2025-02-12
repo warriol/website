@@ -1,4 +1,0 @@
-FECHA;ARCHIVO;DESCRICIÓN;OBSERVACIÓN;ESTADO
-22/07/2016;;Comienzo mi sitio nuevo desde cero;;revision
-22/07/2016;Esquema;Creo el esquema de carpetas y su organización;- el prefijo "_" indica que son carpetas y/o archivos que no se subirán.<br>- app: dentro iran todos los archivos parciales, MODELOS, VISTAS, CONTROLADORES, JS, CSS.<br>- apps: aplicaciones de ejemplo como subdominios.<br> - config: archivo de configuracion del sitio.<br> - debug: debug del sitio y archivo temporales de prueba y onsola.<br> - errores: manejador de errores de servidor.<br> - res: recursos generales;revisión
-22/07/2016;;;;
