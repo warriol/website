@@ -24,6 +24,7 @@
 		}
 	}
 	// inicio de sesion
+/*
 	if(isset($_POST['btn-entrar']))
 	{
 		// $wda->debug($_POST['correo-usuario'], $_POST['pass']);
@@ -86,7 +87,7 @@
 		}
 		return $res;
 	}
-
+*/
 ?>
 
 <!DOCTYPE html>

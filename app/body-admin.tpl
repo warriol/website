@@ -54,7 +54,7 @@
 													<div class="form-group">
 														<div class="col-md-12">
 															<label>Correo</label>
-															<input type="email"  onKeyUp="revisar_correo('i_correo','ie_correo')" id="i_correo" name="correo_usuario" value="" class="form-control input-lg" placeholder="Correo">
+															<input type="email"  onKeyUp="revisar_correo('i_correo','ie_correo')" id="i_correo" name="correo_usuario" value="" class="form-control input-lg" placeholder="Correo" required>
                                                             <div class="alert-danger" id="ie_correo" style='display:none;'>(*) correo inválido.</div>
 														</div>
 													</div>
@@ -64,7 +64,7 @@
 														<div class="col-md-12">
 															<a class="pull-right" href="#">(Olvidaste la contraseña?)</a>
 															<label>Contraseña</label>
-															<input type="password" name="pass" value="" class="form-control input-lg" placeholder="Contraseña">
+															<input type="password" name="pass" value="" class="form-control input-lg" placeholder="Contraseña" required>
 														</div>
 													</div>
 												</div>

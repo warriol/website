@@ -3,6 +3,9 @@
 		if(isset($_GET['enviado'])){
 			echo '<div class="row"><div class="alert alert-success">Gracias! su mensaje ha sido recibido!<br> También puedes ponerte en contacto a trvés de: warriol@gmail.com</div></div>';
 		}
+		if(isset($_GET['error'])){
+			echo '<div class="row"><div class="alert alert-danger">Lo siento, ha ocurrido un error al enviar el mensaje, por favor intente nuevamente.<br><em><b>'.$_GET['res'].'</b></em></div></div>';
+		}
 		?>
 			<div class="row">
 				<div class="col-md-8">
@@ -48,16 +51,16 @@
 										<div class="col-md-12">
 											<div class="checkbox-group" data-msg-required="Seleccione al menos una opción.">
 												<label class="checkbox-inline">
-													<input type="checkbox" name="checkboxes[]" id="inlineCheckbox1" value="option1">Diseño
+													<input type="checkbox" name="checkboxes[]" id="inlineCheckbox1" value="Diseño">Diseño
 												</label>
 												<label class="checkbox-inline">
-													<input type="checkbox" name="checkboxes[]" id="inlineCheckbox2" value="option2">Programación
+													<input type="checkbox" name="checkboxes[]" id="inlineCheckbox2" value="Programacion">Programación
 												</label>
 												<label class="checkbox-inline">
-													<input type="checkbox" name="checkboxes[]" id="inlineCheckbox3" value="option3">Base de datos
+													<input type="checkbox" name="checkboxes[]" id="inlineCheckbox3" value="BD">Base de datos
 												</label>
 												<label class="checkbox-inline">
-													<input type="checkbox" name="checkboxes[]" id="inlineCheckbox2" value="option4">Otros
+													<input type="checkbox" name="checkboxes[]" id="inlineCheckbox2" value="otros">Otros
 												</label>
 											</div>
 										</div>
@@ -120,13 +123,8 @@
 						</div>
 						<div class="row">
 							<div class="form-group">
-								<div class="col-md-4">
-									<div class="captcha form-control">
-										<div class="g-recaptcha" data-sitekey="6LcUp8cqAAAAAP1i6DsbtL7PT9quooVQSg6u7zPw"></div>
-									</div>
-								</div>
-								<div class="col-md-8">
-									<input type="text" value="" maxlength="6" data-msg-captcha="Código de verificación equivocado." data-msg-required="Por favor, escriba el código de verificación." placeholder="Escriba el código de verificación." class="form-control input-lg captcha-input" name="captcha" id="captcha" required>
+								<div class="col-md-12">
+									<div class="g-recaptcha" data-sitekey="6LcUp8cqAAAAAP1i6DsbtL7PT9quooVQSg6u7zPw" data-action="LOGIN"></div>
 								</div>
 							</div>
 						</div>
@@ -138,7 +136,12 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<input type="submit" id="contactFormSubmit" value="Enviar Mensaje" class="btn btn-primario btn-lg pull-right" data-loading-text="Cargando...">
+								<input
+										type="submit"
+										id="contactFormSubmit"
+										value="Enviar Mensaje"
+										class="btn btn-primario btn-lg pull-right"
+										data-loading-text="Cargando...">
 							</div>
 						</div>
 					</form>

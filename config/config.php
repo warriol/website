@@ -31,7 +31,7 @@
 
 	include_once './clases/class.wda.php';
 	//$wda = new wda($DB_con);
-    $wda = new wda($DB_con);
+    $wda = new wda();
 
 	require('./app/idioma/idiomas.php');
 	

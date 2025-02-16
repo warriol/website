@@ -1,66 +1,100 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $recaptchaSecret = '6LcUp8cqAAAAAJNAvGJyWKbdV1TR48qa08CcIyY3';
+    $recaptchaResponse = $_POST['g-recaptcha-response'];
 
-if(isset($_POST)){
-    // Varios destinatarios
-    // 6LcUp8cqAAAAAJNAvGJyWKbdV1TR48qa08CcIyY3
-    // $para  = 'aidan@example.com' . ', '; // atención a la coma
+    $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$recaptchaResponse");
+    $responseKeys = json_decode($response, true);
+
+    if (intval($responseKeys["success"]) !== 1) {
+        header('Location: ../../contacto.php?error&res=Por favor, complete el reCAPTCHA.');
+        die();
+    }
+
+    $para = 'warriols@warriol.site'; // 'warriol.games@gmail.com, warriol@hotmail.com';
 
     // título
-    $título = 'Enviado desde mi sitio...';
-    
+    $titulo = 'Enviado desde mi sitio...';
+
     // mensaje
     $mensaje = '
-    <html>
-    <head>
-      <title>Mensaje del webmaster</title>
-    </head>
-    <body>
-      <p>!Aviso Importante!</p>
-      <table>
-        <tr>
-          <th>nombre</th><th>correo</th>
-        </tr>';
-			
-	if($_POST)
-	{
-	foreach ($_POST as $clave=>$valor)
-		{
-		if ($clave == 'email'){
-			$clean_para = "";
-			$valort = $valor;
-			if (filter_var($valort,FILTER_VALIDATE_EMAIL)){
-				$clean_para =  filter_var($valort,FILTER_SANITIZE_EMAIL);
-			}
-			$valor = $clean_para;
-		}
-		$mensaje .= "<tr><td>$clave</td><td>$valor</td></tr>";
-		}
-	}
-          
+        <html>
+        <head>
+          <title>Mensaje del webmaster</title>
+        </head>
+        <body>
+          <p>!Aviso Importante!</p>
+          <table>
+            <tr>
+              <th>nombre</th><th>correo</th>
+            </tr>';
+
+    if($_POST)
+    {
+        foreach ($_POST as $clave=>$valor)
+        {
+            if ($clave == 'email'){
+                $clean_para = "";
+                $valort = $valor;
+                if (filter_var($valort,FILTER_VALIDATE_EMAIL)){
+                    $clean_para = filter_var($valort,FILTER_SANITIZE_EMAIL);
+                }
+                $valor = $clean_para;
+            } else {
+                if (is_array($valor)) {
+                    $valor = implode(", ", array_map('htmlspecialchars', $valor));
+                } else {
+                    $valor = filter_var($valor, FILTER_SANITIZE_STRING);
+                }
+            }
+            if ($clave != 'g-recaptcha-response') {
+                $mensaje .= "<tr><td>$clave</td><td>$valor</td></tr>";
+            }
+        }
+    }
+
     $mensaje .= '
       </table>
     </body>
     </html>
     ';
-    
-    // Para enviar un correo HTML, debe establecerse la cabecera Content-type
+
+    //$para = filter_var($_POST['email'],FILTER_SANITIZE_EMAIL);
+
+    // Para enviar un correo HTML con un archivo adjunto, debe establecerse la cabecera Content-type
     $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
-    $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-    
+    $cabeceras .= 'Content-type: multipart/mixed; boundary="boundary"' . "\r\n";
+
     // Cabeceras adicionales
-    $cabeceras .= 'To: '.$_POST['nombre'].' <'.$clean_para.'>' . "\r\n";
-    $cabeceras .= 'From: Webmaster <admin@wilsonarriola.com>' . "\r\n";
-    // $cabeceras .= 'Cc: birthdayarchive@example.com' . "\r\n";
-    // $cabeceras .= 'Bcc: birthdaycheck@example.com' . "\r\n";
-    
-    // Enviarlo
-    $res = mail($para, $título, $mensaje, $cabeceras);
+    $cabeceras .= 'To: Webmaster <warriol@gmail.com>' . "\r\n";
+    $cabeceras .= 'From: Webmaster <admin@warriol.site>' . "\r\n";
+
+    // Mensaje en formato MIME
+    $mensaje_mime = '--boundary' . "\r\n";
+    $mensaje_mime .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n\r\n";
+    $mensaje_mime .= $mensaje . "\r\n\r\n";
+
+    if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] == UPLOAD_ERR_OK) {
+        $file = $_FILES['attachment']['tmp_name'];
+        $filename = $_FILES['attachment']['name'];
+        $filedata = file_get_contents($file);
+        $filedata = chunk_split(base64_encode($filedata));
+
+        $mensaje_mime .= '--boundary' . "\r\n";
+        $mensaje_mime .= 'Content-Type: application/octet-stream; name="' . $filename . '"' . "\r\n";
+        $mensaje_mime .= 'Content-Transfer-Encoding: base64' . "\r\n";
+        $mensaje_mime .= 'Content-Disposition: attachment; filename="' . $filename . '"' . "\r\n\r\n";
+        $mensaje_mime .= $filedata . "\r\n\r\n";
+    }
+
+    $mensaje_mime .= '--boundary--';
+
+    $res = mail($para, $titulo, $mensaje_mime, $cabeceras);
 
     if (!$res) {
         $msj = error_get_last();
-		$res = $msj['message'];
+        $res = $msj['message'];
     }
-	header('Location: ../../contacto.php?enviado&res=' . $res);
-}else{
-	header('Location: ../../errores/index.php');
+    header('Location: ../../contacto.php?enviado&res=' . $res);
+
 }

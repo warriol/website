@@ -49,3 +49,5 @@
         </script>
         
 		<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+
+		<script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
