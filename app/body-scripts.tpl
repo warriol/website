@@ -21,6 +21,3 @@
 		<script src="app/vendor/jflickrfeed/jflickrfeed.js"></script>
 		<script src="app/vendor/magnific-popup/jquery.magnific-popup.js"></script>
 		<script src="app/vendor/vide/vide.js"></script>
-        
-        <!-- enlace al service workers -->
-        <script src="app/js/app.js" async></script>
