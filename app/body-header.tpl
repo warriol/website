@@ -24,7 +24,7 @@
 									<a href="contacto.php">Contacto</a>
 								</li>
 								<li>
-									<a href="admin.php">Administración</a>
+									<a href="admin/admin.php">Administración</a>
 								</li>
 							</ul>
 						</nav>

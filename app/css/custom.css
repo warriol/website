@@ -8,21 +8,21 @@
 
 @font-face {
 	font-family: 'Alegreya', serif;
-	src:url(fonts/Alegreya/Alegreya-Regular.ttf)
+	src:url(fonts/Alegreya/Alegreya-Regular.ttf);
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Alegreya SC', serif;
-	src:url(fonts/Alegreya_SC/AlegreyaSC-Regular.ttf)
+	src:url(fonts/Alegreya_SC/AlegreyaSC-Regular.ttf);
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Oswald', sans-serif;
-	src:url(fonts/Oswald/Oswald-Regular.ttf)
+	src:url(fonts/Oswald/Oswald-Regular.ttf);
 	font-weight: normal;
 	font-style: normal;
 }
@@ -76,7 +76,7 @@ input#contactFormSubmit.btn-primario{
 }
 input#contactFormSubmit.btn-primario:hover {
 	background: linear-gradient(to bottom, rgba(201,222,150,1) 0%,rgba(138,182,107,1) 44%,rgba(57,130,53,1) 100%) !important;
-	border-color:#333 !important; */
+	border-color:#333 !important;
 }
 
 /* footer */

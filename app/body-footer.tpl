@@ -27,47 +27,47 @@
 							<ul class="list-unstyled recent-work">
 								<li>
 									<a class="thumb-info" href="https://factus.api.warriol.site/">
-										<img class="img-responsive" src="app/img/projects/factus.png" alt="">
+										<img class="img-responsive" src="<?= $_URLBASE_; ?>/app/img/projects/factus.png" alt="">
 									</a>
 								</li>
 								<li>
 									<a class="thumb-info" href="http://artemisa.com.uy/">
-										<img class="img-responsive" src="app/img/projects/artemisa.jpg" alt="">
+										<img class="img-responsive" src="<?= $_URLBASE_; ?>/app/img/projects/artemisa.jpg" alt="">
 									</a>
 								</li>
 								<li>
 									<a class="thumb-info" href="#">
-										<img class="img-responsive" src="app/img/logos/logo-completo.png" alt="">
+										<img class="img-responsive" src="<?= $_URLBASE_; ?>/app/img/logos/logo-completo.png" alt="">
 									</a>
 								</li>
 								<li>
 									<a class="thumb-info" href="#">
-										<img class="img-responsive" src="app/img/projects/myc.png" alt="">
+										<img class="img-responsive" src="<?= $_URLBASE_; ?>/app/img/projects/myc.png" alt="">
 									</a>
 								</li>
 								<li>
 									<a class="thumb-info" href="#">
-										<img class="img-responsive" src="app/img/projects/myc2.jpg" alt="">
+										<img class="img-responsive" src="<?= $_URLBASE_; ?>/app/img/projects/myc2.jpg" alt="">
 									</a>
 								</li>
 								<li>
 									<a class="thumb-info" href="#">
-										<img class="img-responsive" src="app/img/projects/sgsp3.jpg" alt="">
+										<img class="img-responsive" src="<?= $_URLBASE_; ?>/app/img/projects/sgsp3.jpg" alt="">
 									</a>
 								</li>
 								<li>
 									<a class="thumb-info" href="#">
-										<img class="img-responsive" src="app/img/projects/nova.jpg" alt="">
+										<img class="img-responsive" src="<?= $_URLBASE_; ?>/app/img/projects/nova.jpg" alt="">
 									</a>
 								</li>
 								<li>
 									<a class="thumb-info" href="#">
-										<img class="img-responsive" src="app/img/projects/pillory.jpg" alt="">
+										<img class="img-responsive" src="<?= $_URLBASE_; ?>/app/img/projects/pillory.jpg" alt="">
 									</a>
 								</li>
 								<li>
 									<a class="thumb-info" href="#">
-										<img class="img-responsive" src="app/img/projects/sc.jpg" alt="">
+										<img class="img-responsive" src="<?= $_URLBASE_; ?>/app/img/projects/sc.jpg" alt="">
 									</a>
 								</li>
 							</ul>

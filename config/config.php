@@ -1,6 +1,6 @@
 <?php
 	if($_SERVER["SERVER_NAME"] == "localhost"){
-		$_URLBASE_ = "http://localhost/wda/";
+		$_URLBASE_ = "http://localhost/website/";
 	}else{
 		if (isset($_SERVER['HTTPS'])) {
 			$URL_segura = "https://";
@@ -10,10 +10,4 @@
 		$_URLBASE_ = $URL_segura  . $_SERVER["SERVER_NAME"]. "/";
 	}
 
-	require('./app/idioma/idiomas.php');
-	
-	$lang = 'es';
-	if ( isset($_GET['lang']) ){
-		$lang = $_GET['lang'];
-	}
 ?>

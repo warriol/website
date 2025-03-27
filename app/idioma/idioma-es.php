@@ -1,10 +1,9 @@
 <?php
 $texts = array(
-	'tInicio' => 'Inicio',
+	'Inicio' => 'Inicio',
 	'Nosotros' => 'Sobre nosotros',
-	'tAcercade' => 'Portafolio',
-	'tBlog' => 'Blog',
-	'tContacto' => 'Contacto',
-	'tError' => 'Error'
+	'Acercade' => 'Portafolio',
+	'Blog' => 'Blog',
+	'Contacto' => 'Contacto',
+	'Error' => 'Error'
 );
-?>

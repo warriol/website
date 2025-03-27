@@ -1,6 +1,6 @@
 			<header id="header">
 				<div class="container">
-					<h1 class="logo"><img src="app/img/logos/wilsondenisarrioal.png" /></h1>
+					<h1 class="logo"><img src="../app/img/logos/wilsondenisarrioal.png" /></h1>
 					<button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
 						<i class="fa fa-bars"></i>
 					</button>

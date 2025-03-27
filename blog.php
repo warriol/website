@@ -5,9 +5,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Blog</title>
 		<?php
-    		include('app/header-meta-blog.tpl'); // no links
-			include('app/header-links-blog.tpl'); // echo
+    		include('app/header-meta.tpl'); // no links
+			include('app/header-links.tpl'); // echo
         ?>
     </head>
     <body>
@@ -26,7 +27,7 @@
         </div>
         <?php
 			include('app/body-scripts.tpl'); // echo
-			include('app/body-scripts-acercade.tpl'); // echo
+			include('app/body-scripts-index.tpl'); // echo
 		?>
     </body>
 </html>

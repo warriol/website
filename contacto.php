@@ -1,13 +1,13 @@
 <?php
-    ini_set( 'display_errors', 1 );
 	session_start();
 	include('config/config.php');
 ?>
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Contacto</title>
 		<?php
-    		include('app/header-meta-contacto.tpl'); // no links
+    		include('app/header-meta.tpl'); // no links
 			include('app/header-links.tpl'); // echo
         ?>
     </head>
@@ -27,7 +27,9 @@
         </div>
         <?php
 			include('app/body-scripts.tpl'); // echo
-			include('app/body-scripts-contacto.tpl'); // echo
+			include('app/body-scripts-index.tpl'); // echo
 		?>
+        <!-- Specific Page Vendor and Views -->
+        <script src="app/js/views/view.contact.js"></script>
     </body>
 </html>

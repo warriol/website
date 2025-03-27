@@ -1,10 +1,11 @@
 <?php
-session_start();
-include('config/config.php');
+    session_start();
+    include('config/config.php');
 ?>
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Inicio</title>
 		<?php
     		include('app/header-meta.tpl');
 			include('app/header-links.tpl');
@@ -32,5 +33,7 @@ include('config/config.php');
 			include('app/body-scripts.tpl');
 			include('app/body-scripts-index.tpl');
 		?>
+        <!-- Specific Page Vendor and Views -->
+        <script src="app/js/views/view.home.js"></script>
     </body>
 </html>

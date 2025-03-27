@@ -5,8 +5,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Portafolio</title>
 		<?php
-    		include('app/header-meta-acercade.tpl'); // no links
+    		include('app/header-meta.tpl'); // no links
 			include('app/header-links.tpl'); // echo
         ?>
     </head>
@@ -26,7 +27,7 @@
         </div>
         <?php
 			include('app/body-scripts.tpl'); // echo
-			include('app/body-scripts-acercade.tpl'); // echo
+			include('app/body-scripts-index.tpl'); // echo
 		?>
     </body>
     

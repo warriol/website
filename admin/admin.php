@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include('config/config.php');
+	include('../config/config.php');
 
 	// variable global con el correo de administrador
 	$_SERVER['SERVER_ADMIN'] = "warriol@gmail.com";
@@ -30,27 +30,27 @@
 
     <head>
 		<?php
-    		include('app/header-meta.tpl'); // no links
-			include('app/header-links.tpl'); // echo
+    		include('../app/header-meta.tpl'); // no links
+			include('../app/header-links.tpl'); // echo
         ?>
     </head>
     <body>
     	<div class="body">
         	<?php
-					include('app/body-header-admin'.$_SERVER['PREFIJO_ADMIN'].'.tpl');
+					include('body-header-admin'.$_SERVER['PREFIJO_ADMIN'].'.tpl');
 			?>
             <div role="main" class="main">
 				<?php
-                    include('app/body-admin'.$_SERVER['PREFIJO_ADMIN'].'.tpl'); // echo
+                    include('body-admin'.$_SERVER['PREFIJO_ADMIN'].'.tpl'); // echo
                 ?>
             </div>
         	<?php
-				include('app/body-footer.tpl'); // hecho
+				include('../app/body-footer.tpl'); // hecho
 			?>
         </div>
         <?php
-			include('app/body-scripts.tpl'); // echo
-			include('app/body-scripts-index.tpl'); // echo
+			include('../app/body-scripts.tpl'); // echo
+			include('../app/body-scripts-index.tpl'); // echo
 		?>
     </body>
 </html>
