@@ -809,7 +809,7 @@ class wda
 		{
 			?>
             <tr>
-            <td colspan="12">Todav&iacute;a no ha ingresado inmuebles para administrar. Cont&aacute;cte nuestros <a href="./#information">Agentes.</a></td>
+            <td colspan="12">Todav&iacute;a no ha ingresado inmuebles para administrar. Cont&aacute;cte nuestros <a href="../../clases#information">Agentes.</a></td>
             </tr>
             <?php
 		}

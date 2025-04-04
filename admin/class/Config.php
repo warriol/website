@@ -1,6 +1,10 @@
 <?php
 
-namespace class;
+namespace admin\class;
+
+use class\Exception;
+use class\PDO;
+use class\PDOException;
 
 class Config
 {
