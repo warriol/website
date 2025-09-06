@@ -33,16 +33,7 @@
 			include('app/body-scripts.tpl');
 			include('app/body-scripts-index.tpl');
 		?>
-
-        <!--==========================
-        Boton flotante de WhatsApp y audio
-        ============================-->
-        <a href="https://api.whatsapp.com/send?phone=59892373973&text=Hola,%20me%20interesa%20consultar%20más%20sobre" class="whatsapp-float" target="_blank">
-            <img src="app/img/whatsapp.webp" alt="WhatsApp">
-        </a>
-
         <!-- Specific Page Vendor and Views -->
         <script src="app/js/views/view.home.js"></script>
-        <script type="text/javascript" src="stats/stats.js"></script>
     </body>
 </html>

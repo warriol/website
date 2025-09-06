@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Interactiva: Linux y MySQL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Chosen Palette: Warm Neutrals -->
+  <!-- Application Structure Plan: He diseñado la aplicación como un "Camino de Aprendizaje" interactivo con una navegación superior clara para guiar al usuario a través de cuatro etapas distintas. Esta estructura transforma el documento lineal en módulos manejables. Las primeras etapas son informativas y visualmente limpias, mientras que la Etapa 4 se convierte en un "SQL Playground" completamente interactivo. Este diseño fue elegido para reducir la carga cognitiva de un proceso técnico largo, permitiendo al usuario concentrarse en una sección a la vez y culminar con una herramienta práctica que refuerza el aprendizaje a través de la experimentación directa, lo cual es mucho más efectivo que la simple lectura. -->
+  <!-- Visualization & Content Choices:
+      - Pasos del Proceso (Etapas 1-3) -> Objetivo: Organizar/Informar -> Método: Tarjetas numeradas con iconos (HTML/Tailwind) y bloques de código con botón de copiado. -> Interacción: Navegación entre etapas. -> Justificación: Proporciona una guía clara y fácil de seguir para un proceso secuencial, mejorando la usabilidad.
+      - Datos de la Tabla (Etapa 3) -> Objetivo: Informar -> Método: Tabla HTML estática. -> Interacción: Ninguna. -> Justificación: Muestra visualmente la estructura y el contenido de la base de datos de prueba, proporcionando contexto para la siguiente etapa.
+      - Consultas SQL (Etapa 4) -> Objetivo: Interactuar/Aprender -> Método: Un "SQL Playground" con editor y tabla de resultados dinámica (JS). -> Interacción: Cargar ejemplos, editar y ejecutar consultas, ver resultados en tiempo real. -> Justificación: Fomenta el aprendizaje activo y la experimentación, lo que es crucial para dominar SQL.
+      - Datos Agregados (Etapa 4) -> Objetivo: Comparar/Visualizar -> Método: Gráfico de barras dinámico (Chart.js/Canvas). -> Interacción: El gráfico se genera/actualiza basado en los resultados de consultas de agregación. -> Justificación: Ofrece una representación visual de los datos agregados que es más intuitiva y fácil de interpretar que los números brutos en una tabla.
+  -->
+  <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fdfaf6;
+      color: #4a4a4a;
+    }
+    .nav-item {
+      transition: all 0.3s ease;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-item.active {
+      border-bottom-color: #e58d4e;
+      color: #e58d4e;
+    }
+    .step-card {
+      background-color: #fff;
+      border-left: 4px solid #f0b893;
+    }
+    .code-block {
+      background-color: #2d3748;
+      color: #e2e8f0;
+      font-family: monospace;
+    }
+    .btn-primary {
+      background-color: #e58d4e;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #d67c3d;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 300px;
+      max-height: 400px;
+    }
+    @media (min-width: 768px) {
+      .chart-container {
+        height: 350px;
+      }
+    }
+  </style>
+</head>
+<body class="antialiased">
+<div class="container mx-auto p-4 md:p-8 max-w-7xl">
+  <header class="text-center mb-8">
+    <h1 class="text-4xl font-bold text-[#d67c3d]">Guía Interactiva de Linux y MySQL</h1>
+    <p class="text-lg mt-2 text-gray-600">Un camino de aprendizaje desde cero hasta tus primeras consultas</p>
+  </header>
+
+  <nav class="flex justify-center border-b-2 border-gray-200 mb-8">
+    <button id="nav-1" class="nav-item p-4 font-semibold active">Etapa 1: VM</button>
+    <button id="nav-2" class="nav-item p-4 font-semibold">Etapa 2: Debian</button>
+    <button id="nav-3" class="nav-item p-4 font-semibold">Etapa 3: MySQL</button>
+    <button id="nav-4" class="nav-item p-4 font-semibold">Etapa 4: SQL</button>
+  </nav>
+
+  <main id="content-container">
+    <!-- Etapa 1: VM -->
+    <section id="content-1" class="space-y-6">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-gray-800">Etapa 1: Configuración de la Máquina Virtual</h2>
+        <p class="mt-2 text-gray-600">Crearemos un entorno seguro para practicar sin afectar tu computadora principal.</p>
+      </div>
+      <div class="step-card p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-2 text-gray-700">1. Habilitar Virtualización</h3>
+        <p>Es un ajuste clave en tu PC. Para verificar en Windows, abre el Administrador de Tareas (`Ctrl + Shift + Esc`), ve a la pestaña 'Rendimiento' y asegúrate de que 'Virtualización' esté 'Habilitada'.</p>
+      </div>
+      <div class="step-card p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-2 text-gray-700">2. Instalar VirtualBox</h3>
+        <p>Descarga el instalador desde el <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" class="text-[#e58d4e] hover:underline">sitio oficial de VirtualBox</a>. La instalación es estándar, puedes aceptar todas las opciones por defecto.</p>
+      </div>
+      <div class="step-card p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-2 text-gray-700">3. Crear una Nueva VM</h3>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Abre VirtualBox y haz clic en 'Nueva'.</li>
+          <li><strong>Nombre:</strong> "Debian-MySQL"</li>
+          <li><strong>Tipo:</strong> Linux, <strong>Versión:</strong> Debian (64-bit)</li>
+          <li><strong>Memoria RAM:</strong> 2048 MB (2 GB)</li>
+          <li><strong>Disco Duro:</strong> 'Crear un disco duro virtual ahora', tipo 'VDI', 'Reservado dinámicamente', con un tamaño de 20 GB.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Etapa 2: Debian -->
+    <section id="content-2" class="hidden space-y-6">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-gray-800">Etapa 2: Instalación de Debian 12</h2>
+        <p class="mt-2 text-gray-600">Instalaremos un sistema operativo Linux minimalista, perfecto para aprender a usar la terminal.</p>
+      </div>
+      <div class="step-card p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-2 text-gray-700">1. Descargar la Imagen de Debian</h3>
+        <p>Ve a la <a href="https://www.debian.org/download" target="_blank" class="text-[#e58d4e] hover:underline">página de descargas de Debian</a> y obtén la imagen ISO de la versión 12 ("Bookworm"). Elige la opción 'netinst' que es más ligera.</p>
+      </div>
+      <div class="step-card p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-2 text-gray-700">2. Instalar en la VM</h3>
+        <p>Inicia tu VM en VirtualBox. Te pedirá un disco de inicio; selecciona el archivo ISO que descargaste.</p>
+        <ul class="list-disc list-inside space-y-2 mt-4">
+          <li>Elige la opción <strong>'Graphical install'</strong>.</li>
+          <li>Configura tu idioma, ubicación y teclado.</li>
+          <li>Crea una <strong>contraseña de root</strong> y una <strong>cuenta de usuario</strong>. ¡Anótalas!</li>
+          <li>Para el particionado del disco, la opción más simple es <strong>'Guiado - utilizar todo el disco'</strong>.</li>
+          <li>En la selección de software, <strong>desmarca todo excepto 'SSH server' y 'standard system utilities'</strong>. No necesitamos una interfaz gráfica.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Etapa 3: MySQL -->
+    <section id="content-3" class="hidden space-y-6">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-gray-800">Etapa 3: Configuración de la Base de Datos</h2>
+        <p class="mt-2 text-gray-600">Instalaremos MariaDB (una versión de MySQL) y crearemos una base de datos de prueba.</p>
+      </div>
+      <div class="step-card p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-2 text-gray-700">1. Instalar y Asegurar MariaDB</h3>
+        <p>Inicia tu VM y accede con tu usuario. Ejecuta estos comandos en la terminal:</p>
+        <div class="code-block p-4 rounded-md mt-4">
+                        <pre><code># Actualizar la lista de paquetes
+sudo apt update
+
+# Instalar el servidor y cliente de MariaDB
+sudo apt install mariadb-server mariadb-client
+
+# Asegurar la instalación
+sudo mysql_secure_installation</code></pre>
+        </div>
+        <p class="mt-2">Durante `mysql_secure_installation`, establece una contraseña de root para la base de datos y responde 'y' (sí) a las preguntas de seguridad.</p>
+      </div>
+      <div class="step-card p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-2 text-gray-700">2. Crear Base de Datos y Tabla de Prueba</h3>
+        <p>Ahora, entraremos a la consola de MariaDB para preparar nuestro entorno de práctica.</p>
+        <div class="code-block p-4 rounded-md mt-4 relative group">
+          <button onclick="copyCode(this)" class="absolute top-2 right-2 px-2 py-1 bg-gray-600 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">Copiar</button>
+          <pre><code class="language-sql">-- Entrar a la consola
+sudo mysql -u root -p
+
+-- Crear la base de datos
+CREATE DATABASE tienda_virtual;
+
+-- Usar la nueva base de datos
+USE tienda_virtual;
+
+-- Crear una tabla de productos
+CREATE TABLE productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    stock INT DEFAULT 0,
+    categoria VARCHAR(100)
+);
+
+-- Insertar datos de prueba
+INSERT INTO productos (nombre, precio, stock, categoria) VALUES
+('Laptop', 1200.50, 50, 'electronica'),
+('Teclado mecánico', 85.00, 150, 'perifericos'),
+('Mouse gaming', 45.75, 200, 'perifericos'),
+('Monitor 27"', 350.00, 75, 'electronica');</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Etapa 4: SQL -->
+    <section id="content-4" class="hidden">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-800">Etapa 4: SQL Playground</h2>
+        <p class="mt-2 text-gray-600">¡Es hora de practicar! Elige una consulta de ejemplo, modifícala si quieres y ejecútala para ver el resultado.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <div class="md:col-span-3">
+          <h3 class="text-lg font-semibold mb-2">Ejemplos de Consultas</h3>
+          <div id="query-examples" class="space-y-2"></div>
+        </div>
+        <div class="md:col-span-9">
+          <h3 class="text-lg font-semibold mb-2">Editor de Consultas</h3>
+          <textarea id="sql-editor" class="w-full h-40 p-2 border rounded-md font-mono bg-gray-50"></textarea>
+          <button id="run-query" class="btn-primary px-4 py-2 rounded-md mt-2">Ejecutar Consulta</button>
+          <div id="error-message" class="text-red-500 mt-2"></div>
+
+          <h3 class="text-lg font-semibold mt-6 mb-2">Resultados</h3>
+          <div class="overflow-x-auto bg-white rounded-lg shadow">
+            <table class="w-full text-sm text-left text-gray-500">
+              <thead id="results-head" class="text-xs text-gray-700 uppercase bg-gray-50">
+              </thead>
+              <tbody id="results-body">
+              </tbody>
+            </table>
+          </div>
+          <div id="chart-section" class="mt-6 hidden">
+            <h3 class="text-lg font-semibold mb-2 text-center">Visualización de Resultados</h3>
+            <div class="chart-container">
+              <canvas id="results-chart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  const navButtons = document.querySelectorAll('nav button');
+  const contentSections = document.querySelectorAll('main section');
+
+  const sampleData = [
+    { id: 1, nombre: 'Laptop', precio: 1200.50, stock: 50, categoria: 'electronica' },
+    { id: 2, nombre: 'Teclado mecánico', precio: 85.00, stock: 150, categoria: 'perifericos' },
+    { id: 3, nombre: 'Mouse gaming', precio: 45.75, stock: 200, categoria: 'perifericos' },
+    { id: 4, nombre: 'Monitor 27"', precio: 350.00, stock: 75, categoria: 'electronica' }
+  ];
+
+  const queryExamples = [
+    { name: 'Seleccionar todo', query: 'SELECT * FROM productos;', desc: 'Muestra todas las columnas y filas de la tabla.' },
+    { name: 'Columnas específicas', query: 'SELECT nombre, precio FROM productos;', desc: 'Muestra solo el nombre y el precio de cada producto.' },
+    { name: 'Filtrar por stock', query: 'SELECT * FROM productos WHERE stock < 100;', desc: 'Encuentra productos con menos de 100 unidades en stock.' },
+    { name: 'Filtrado múltiple', query: 'SELECT * FROM productos WHERE precio > 50 AND stock > 100;', desc: 'Busca productos que cumplan dos condiciones a la vez.' },
+    { name: 'Ordenar por precio (ASC)', query: 'SELECT * FROM productos ORDER BY precio ASC;', desc: 'Ordena los productos del más barato al más caro.' },
+    { name: 'Ordenar por precio (DESC)', query: 'SELECT * FROM productos ORDER BY precio DESC;', desc: 'Ordena los productos del más caro al más barato.' },
+    { name: 'Contar productos', query: 'SELECT COUNT(*) FROM productos;', desc: 'Cuenta el número total de productos en la tabla.' },
+    { name: 'Precio promedio', query: 'SELECT AVG(precio) FROM productos;', desc: 'Calcula el precio medio de todos los productos.' },
+    { name: 'Precio max/min', query: 'SELECT MAX(precio) AS precio_max, MIN(precio) AS precio_min FROM productos;', desc: 'Encuentra el precio más alto y el más bajo.' },
+    { name: 'Agrupar por categoría', query: 'SELECT categoria, COUNT(*) AS total FROM productos GROUP BY categoria;', desc: 'Cuenta cuántos productos hay en cada categoría.' }
+  ];
+
+  const editor = document.getElementById('sql-editor');
+  const examplesContainer = document.getElementById('query-examples');
+  const runButton = document.getElementById('run-query');
+  const resultsHead = document.getElementById('results-head');
+  const resultsBody = document.getElementById('results-body');
+  const errorMessage = document.getElementById('error-message');
+  const chartSection = document.getElementById('chart-section');
+  const chartCanvas = document.getElementById('results-chart');
+  let resultsChart = null;
+
+  function switchTab(targetId) {
+    navButtons.forEach(button => {
+      button.classList.toggle('active', button.id === `nav-${targetId}`);
+    });
+    contentSections.forEach(section => {
+      section.classList.toggle('hidden', section.id !== `content-${targetId}`);
+    });
+  }
+
+  navButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.id.split('-')[1];
+      switchTab(targetId);
+    });
+  });
+
+  function populateExamples() {
+    queryExamples.forEach(ex => {
+      const button = document.createElement('button');
+      button.className = 'w-full text-left p-2 rounded-md bg-white hover:bg-gray-100 shadow-sm text-sm';
+      button.textContent = ex.name;
+      button.title = ex.desc;
+      button.onclick = () => {
+        editor.value = ex.query;
+      };
+      examplesContainer.appendChild(button);
+    });
+  }
+
+  function copyCode(button) {
+    const pre = button.nextElementSibling;
+    const code = pre.innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      button.innerText = 'Copiado!';
+      setTimeout(() => {
+        button.innerText = 'Copiar';
+      }, 2000);
+    });
+  }
+
+  function renderTable(data) {
+    resultsHead.innerHTML = '';
+    resultsBody.innerHTML = '';
+
+    if (!data || data.length === 0) {
+      resultsBody.innerHTML = '<tr><td class="p-4 text-center text-gray-500">La consulta no devolvió resultados.</td></tr>';
+      return;
+    }
+
+    const headers = Object.keys(data[0]);
+    const headerRow = document.createElement('tr');
+    headers.forEach(header => {
+      const th = document.createElement('th');
+      th.scope = 'col';
+      th.className = 'px-6 py-3';
+      th.textContent = header;
+      headerRow.appendChild(th);
+    });
+    resultsHead.appendChild(headerRow);
+
+    data.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.className = 'bg-white border-b';
+      headers.forEach(header => {
+        const td = document.createElement('td');
+        td.className = 'px-6 py-4';
+        let value = row[header];
+        if(typeof value === 'number' && !Number.isInteger(value)){
+          value = value.toFixed(2);
+        }
+        td.textContent = value;
+        tr.appendChild(td);
+      });
+      resultsBody.appendChild(tr);
+    });
+  }
+
+  function renderChart(data, labelsKey, dataKey) {
+    chartSection.classList.remove('hidden');
+
+    if(resultsChart) {
+      resultsChart.destroy();
+    }
+
+    const labels = data.map(item => item[labelsKey]);
+    const values = data.map(item => item[dataKey]);
+
+    resultsChart = new Chart(chartCanvas, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: `Total por ${labelsKey}`,
+          data: values,
+          backgroundColor: ['#e58d4e', '#f0b893', '#d67c3d', '#4a4a4a', '#a0aec0'],
+          borderColor: 'rgba(255, 255, 255, 0.1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+  }
+
+  function executeQuery() {
+    errorMessage.textContent = '';
+    chartSection.classList.add('hidden');
+    let query = editor.value.trim().toLowerCase();
+    let data = JSON.parse(JSON.stringify(sampleData));
+
+    try {
+      const selectMatch = query.match(/^select\s+(.+?)\s+from\s+productos/);
+      if (!selectMatch) throw new Error("Consulta SELECT inválida.");
+
+      let columns = selectMatch[1].trim();
+
+      if (query.includes('where')) {
+        const whereMatch = query.match(/where\s+(.+)/);
+        if (whereMatch) {
+          let condition = whereMatch[1].split('order by')[0].split('group by')[0].trim();
+          data = data.filter(row => {
+            if (condition.includes(' and ')) {
+              const parts = condition.split(' and ');
+              return parts.every(part => evalCondition(row, part.trim()));
+            } else {
+              return evalCondition(row, condition);
+            }
+          });
+        }
+      }
+
+      if (query.includes('group by')) {
+        const groupMatch = query.match(/group by\s+(\w+)/);
+        if (groupMatch) {
+          const groupKey = groupMatch[1];
+          const aggMatch = columns.match(/(\w+)\((.+?)\)(?:\s+as\s+(\w+))?/);
+          if (!aggMatch) throw new Error("GROUP BY requiere una función de agregación (COUNT, AVG, etc).");
+
+          const func = aggMatch[1];
+          const col = aggMatch[2].trim() === '*' ? null : aggMatch[2].trim();
+          const alias = aggMatch[3] || `${func}(${col || '*'})`;
+
+          const groups = {};
+          data.forEach(row => {
+            const key = row[groupKey];
+            if (!groups[key]) groups[key] = [];
+            groups[key].push(row);
+          });
+
+          let groupedData = [];
+          for (const key in groups) {
+            let res = {};
+            res[groupKey] = key;
+            if (func === 'count') {
+              res[alias] = groups[key].length;
+            }
+            groupedData.push(res);
+          }
+          data = groupedData;
+          renderChart(data, groupKey, alias);
+        }
+      } else if (columns.startsWith('count(') || columns.startsWith('avg(') || columns.startsWith('max(') || columns.startsWith('min(')) {
+        const aggResults = [];
+        columns.split(',').forEach(c => {
+          const aggMatch = c.trim().match(/(\w+)\((.+?)\)(?:\s+as\s+(\w+))?/);
+          if (!aggMatch) return;
+          const func = aggMatch[1];
+          const col = aggMatch[2].trim() === '*' ? 'id' : aggMatch[2].trim();
+          const alias = aggMatch[3] || `${func}(${col})`;
+
+          let result;
+          if(func === 'count') result = data.length;
+          if(func === 'avg') result = data.reduce((sum, row) => sum + row[col], 0) / data.length;
+          if(func === 'max') result = Math.max(...data.map(row => row[col]));
+          if(func === 'min') result = Math.min(...data.map(row => row[col]));
+
+          aggResults.push({ [alias]: result });
+        });
+        data = [Object.assign({}, ...aggResults)];
+
+      } else {
+        if (query.includes('order by')) {
+          const orderMatch = query.match(/order by\s+(\w+)(?:\s+(asc|desc))?/);
+          if (orderMatch) {
+            const [, key, direction] = orderMatch;
+            data.sort((a, b) => {
+              if (a[key] < b[key]) return direction === 'desc' ? 1 : -1;
+              if (a[key] > b[key]) return direction === 'desc' ? -1 : 1;
+              return 0;
+            });
+          }
+        }
+
+        if (columns !== '*') {
+          const selectedCols = columns.split(',').map(c => c.trim());
+          data = data.map(row => {
+            let newRow = {};
+            selectedCols.forEach(col => newRow[col] = row[col]);
+            return newRow;
+          });
+        }
+      }
+
+      renderTable(data);
+    } catch (e) {
+      errorMessage.textContent = 'Error: ' + e.message;
+      resultsHead.innerHTML = '';
+      resultsBody.innerHTML = '';
+    }
+  }
+
+  function evalCondition(row, condition) {
+    const operators = {
+      '<': (a, b) => a < b,
+      '>': (a, b) => a > b,
+      '=': (a, b) => a == b,
+      '<>': (a, b) => a != b,
+      '!=': (a, b) => a != b
+    };
+
+    for (const op in operators) {
+      if (condition.includes(op)) {
+        const [key, value] = condition.split(op).map(s => s.trim());
+        return operators[op](row[key], parseFloat(value));
+      }
+    }
+    return false;
+  }
+
+  runButton.addEventListener('click', executeQuery);
+
+  // Initial state
+  switchTab('1');
+  populateExamples();
+  editor.value = queryExamples[0].query;
+  executeQuery();
+</script>
+</body>
+</html>
