@@ -36,7 +36,7 @@
         <!-- tarjetas de google -->
 		<script type="application/ld+json">
         {
-          "@context": "http://schema.org",
+          "@context": "https://schema.org",
           "@type": "Organization",
           "url": "<?php echo $_URLBASE_; ?>",
           "logo": "<?php echo $_URLBASE_; ?>app/img/logos/wda.png",
