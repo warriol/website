@@ -8,6 +8,35 @@
 									</div>
 									<article class="timeline-box right post post-medium">
 
+										<article class="timeline-box left post post-medium">
+
+											<div class="row">
+												<div class="col-md-12">
+
+													<div class="post-content">
+														<h4><a href="https://warriol.com.uy/almamia/index.html">Alma mía terapias</a></h4>
+														<p>Landing page estática de Alma mía terapai, ofrece a sus clientes detalles de sus terapias y a que se enfoca cada una, brindando ademas un formulario de contacto y enlace a redes sociales, así como mensajería por whatsapp.</p>
+													</div>
+
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="post-meta">
+														<span><i class="fa fa-calendar"></i>01/10/2025 </span><br>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="post-meta">
+														<span><i class="fa fa-user"></i> <a href="https://warriol.com.uy/almamia/index.html">Sitio en construcción</a> </span>
+													</div>
+												</div>
+											</div>
+
+										</article>
+
 										<div class="row">
 											<div class="col-md-12">
 

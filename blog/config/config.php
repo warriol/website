@@ -4,9 +4,10 @@
 		$DB_host = "localhost";
 		$DB_user = "root";
 		$DB_pass = "";
-		$DB_name = "sitio";
+		$DB_name = "blog";
 		
-		$_URLBASE_ = "http://localhost/wda/blog/";
+		$_URL_ = "http://localhost/website/";
+        $_URLBASE_ = "http://localhost/website/blog/";
 	}else{
 		// servidor externo
 		$DB_host = "localhost";
@@ -17,7 +18,7 @@
 		// verifico si es seguro
 		$URL_segura = "http://";
 		if (isset($_SERVER['HTTPS'])) {
-			$URL_segura = "https://";
+			$URL_segura = "https://warriol.com.uy/blog/";
 		}
 		
 		$_URLBASE_ = $URL_segura  . $_SERVER["SERVER_NAME"]. "/";
@@ -40,7 +41,7 @@
 	catch(PDOException $e){
 		$msj = $e->getMessage();
 		
-		header("Location: ".$_URLBASE_."/errores/index.php?msj=".$msj);
+		header("Location: ".$_URL_."/errores/index.php?msj=".$msj);
 	}
 
 	// incluyo la clase general

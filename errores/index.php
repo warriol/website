@@ -68,4 +68,4 @@
 	}
 	$tbl .= '</table>' ;
 
-?>
+    echo $tbl;
