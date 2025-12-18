@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Interactiva: Debian 13 y MSSQL en VirtualBox</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chosen Palette: Warm Neutral -->
+  <!-- Application Structure Plan: The application transforms the linear guide into an interactive vertical stepper/timeline. Each of the four main steps is a collapsible section, allowing users to focus on one task at a time and avoid information overload. This structure maintains the logical sequence of the original report while improving usability and engagement. Key interactions include expanding/collapsing steps and one-click copying for all terminal commands, which directly aids the user in completing the technical process. This design was chosen to make a dense, instructional document more accessible and less intimidating for a non-technical audience. -->
+  <!-- Visualization & Content Choices: Report Info: Step-by-step instructions. Goal: Guide user through a process. Presentation Method: Interactive vertical stepper (HTML/CSS/Tailwind). Interaction: Click to expand/collapse details, click to copy code snippets. Justification: Breaks down complexity, improves workflow. Library/Method: Vanilla JS for interactions. CONFIRMATION: NO SVG/Mermaid used. The focus is on clear typography and interactive textual elements rather than data visualization, as the source material is procedural, not data-driven. -->
+  <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .step-content {
+      transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+    .step-content.open {
+      max-height: 3000px;
+      opacity: 1;
+    }
+    .step-connector::before {
+      content: '';
+      position: absolute;
+      left: 1.25rem;
+      top: 3rem;
+      bottom: -1rem;
+      width: 2px;
+      background-color: #e5e7eb;
+      transform: translateX(-50%);
+    }
+    .step:last-child .step-connector::before {
+      display: none;
+    }
+    .code-block {
+      position: relative;
+    }
+    .copy-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background-color: #4a5568;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .copy-button:hover {
+      background-color: #2d3748;
+    }
+  </style>
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+<div class="container mx-auto px-4 py-8 md:py-12">
+  <header class="text-center mb-12">
+    <h1 class="text-4xl md:text-5xl font-bold text-stone-900">Guía de Instalación de Servidor Virtual</h1>
+    <p class="mt-4 text-lg text-stone-600 max-w-3xl mx-auto">Un recorrido interactivo para instalar Debian 13 con MSSQL Server en una máquina virtual usando VirtualBox.</p>
+  </header>
+
+  <section class="bg-white p-6 md:p-8 rounded-2xl shadow-md mb-12 max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold mb-4 text-stone-900 flex items-center">
+      <span class="text-2xl mr-3">🖥️</span> ¿Qué es una Máquina Virtual?
+    </h2>
+    <p class="text-stone-700 leading-relaxed">
+      Imagina que es como tener una computadora completa dentro de tu computadora actual. Te permite ejecutar otro sistema operativo (como Linux, en este caso) en una ventana, sin afectar tu sistema principal (Windows). Esto es perfecto para aprender, desarrollar y probar software en un entorno aislado y seguro.
+    </p>
+  </section>
+
+  <main class="max-w-4xl mx-auto">
+    <div id="steps-container">
+
+      <div class="step relative pb-8">
+        <div class="step-connector"></div>
+        <div class="flex items-center cursor-pointer step-header">
+          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg z-10">1</div>
+          <h3 class="ml-4 text-2xl font-bold text-stone-900">Instalar Oracle VirtualBox</h3>
+        </div>
+        <div class="ml-14 mt-4 step-content">
+          <p class="mb-4 text-stone-600">Primero, necesitas el programa que te permitirá crear y gestionar las máquinas virtuales. Se llama Oracle VirtualBox y es gratuito.</p>
+          <ol class="list-decimal list-inside space-y-3 text-stone-700">
+            <li>Abre tu navegador web y visita la página oficial de descargas: <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" class="text-blue-600 hover:underline">Página de descargas de VirtualBox</a>.</li>
+            <li>Busca la sección **"VirtualBox platform packages"** y haz clic en el enlace **"Windows hosts"**. Esto descargará el archivo de instalación.</li>
+            <li>Una vez descargado, haz doble clic sobre el archivo para iniciar el asistente de instalación.</li>
+            <li>Sigue las instrucciones en pantalla. Generalmente, solo necesitas hacer clic en **"Siguiente" (Next)**, aceptando las opciones predeterminadas hasta finalizar.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step relative pb-8">
+        <div class="step-connector"></div>
+        <div class="flex items-center cursor-pointer step-header">
+          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg z-10">2</div>
+          <h3 class="ml-4 text-2xl font-bold text-stone-900">Descargar ISO de Debian 13</h3>
+        </div>
+        <div class="ml-14 mt-4 step-content">
+          <p class="mb-4 text-stone-600">Ahora necesitas el "disco de instalación" para el sistema operativo Linux. Este archivo se llama imagen ISO.</p>
+          <ol class="list-decimal list-inside space-y-3 text-stone-700">
+            <li>Ve a la página de descargas de Debian: <a href="https://www.debian.org/download" target="_blank" class="text-blue-600 hover:underline">Página de descargas de Debian</a>.</li>
+            <li>Haz clic en el botón principal de **"Descargar"** para obtener la imagen `netinst`. Es un archivo pequeño que descargará los paquetes necesarios durante la instalación.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step relative pb-8">
+        <div class="step-connector"></div>
+        <div class="flex items-center cursor-pointer step-header">
+          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg z-10">3</div>
+          <h3 class="ml-4 text-2xl font-bold text-stone-900">Crear la Máquina Virtual</h3>
+        </div>
+        <div class="ml-14 mt-4 step-content">
+          <p class="mb-4 text-stone-600">Con los archivos listos, es hora de ensamblar tu nueva computadora virtual.</p>
+          <ol class="list-decimal list-inside space-y-3 text-stone-700">
+            <li>Abre **Oracle VM VirtualBox Manager** y haz clic en el botón **"Nueva"**.</li>
+            <li>Rellena la información inicial:
+              <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+                <li>**Nombre:** "Debian-Servidor"</li>
+                <li>**Tipo:** "Linux"</li>
+                <li>**Versión:** "Debian (64-bit)"</li>
+              </ul>
+            </li>
+            <li>Asigna al menos **2048 MB (2 GB)** de memoria RAM.</li>
+            <li>Selecciona **"Crear un disco duro virtual ahora"**. Usa las opciones por defecto (VDI, reservado dinámicamente) y asígnale un tamaño de al menos **20 GB**.</li>
+            <li>Con la nueva VM seleccionada, ve a **Configuración → Almacenamiento**.</li>
+            <li>Haz clic en el disco óptico **"Vacío"** y, a la derecha, usa el icono de disco para **"Seleccionar un archivo de disco..."**. Elige el archivo ISO de Debian que descargaste.</li>
+            <li>Haz clic en **"Aceptar"** y luego en **"Iniciar"** para comenzar la instalación de Debian. Sigue los pasos del instalador (idioma, país, contraseña, usuario, etc.). La opción **"Guiado - utilizar todo el disco"** es la más sencilla para el particionado.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step relative pb-8">
+        <div class="flex items-center cursor-pointer step-header">
+          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg z-10">4</div>
+          <h3 class="ml-4 text-2xl font-bold text-stone-900">Instalar MSSQL Server Express - opción 1</h3>
+        </div>
+        <div class="ml-14 mt-4 step-content">
+          <p class="mb-4 text-stone-600">Una vez que Debian esté instalado y funcionando, abre la **Terminal** para instalar la base de datos usando los siguientes comandos. Puedes copiar cada bloque con el botón.</p>
+          <div class="space-y-6">
+            <div>
+              <p class="font-semibold text-stone-800">1. Importar la clave GPG del repositorio de Microsoft:</p>
+              <div class="code-block mt-2">
+                <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc</code></pre>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-stone-800">2. Registrar el repositorio de Microsoft para Debian:</p>
+              <div class="code-block mt-2">
+                <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">echo "deb [arch=amd64] https://packages.microsoft.com/debian/12/prod bullseye main" | sudo tee /etc/apt/sources.list.d/mssql-server.list</code></pre>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-stone-800">3. Actualizar la lista de paquetes e instalar SQL Server:</p>
+              <div class="code-block mt-2">
+                                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">sudo apt-get update
+sudo apt-get install -y mssql-server-express</code></pre>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-stone-800">4. Ejecutar el script de configuración:</p>
+              <p class="text-sm text-stone-600">Sigue las instrucciones para aceptar la licencia, elegir la edición Express e introducir una contraseña segura para el administrador 'SA'.</p>
+              <div class="code-block mt-2">
+                <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">sudo /opt/mssql/bin/mssql-conf setup</code></pre>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-stone-800">5. Verificar que el servicio esté activo:</p>
+              <div class="code-block mt-2">
+                <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">systemctl status mssql-server.service</code></pre>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-stone-800">6. (Opcional) Instalar herramientas de línea de comandos y conectar:</p>
+              <div class="code-block mt-2">
+                                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">sudo apt-get install -y mssql-tools unixodbc-dev
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+source ~/.bashrc
+sqlcmd -S localhost -U SA</code></pre>
+                <button class="copy-button">Copiar</button>
+              </div>
+              <p class="mt-2 text-sm text-stone-600">Después de ejecutar el último comando, te pedirá la contraseña que configuraste. Una vez dentro, puedes ejecutar `SELECT @@VERSION;` y luego `GO` para confirmar la conexión.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step relative pb-8">
+        <div class="flex items-center cursor-pointer step-header">
+          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-lg z-10">5</div>
+          <h3 class="ml-4 text-2xl font-bold text-stone-900">Instalar MSSQL Server Express - opción 2</h3>
+        </div>
+        <div class="ml-14 mt-4 step-content">
+          <p class="mb-4 text-stone-600">Una vez que Debian esté instalado y funcionando, abre la **Terminal** para instalar la base de datos usando los siguientes comandos. Puedes copiar cada bloque con el botón.</p>
+          <div class="space-y-6">
+            <div>
+              <p class="font-semibold text-stone-800">1. Crea el directorio de llaves e Importar la clave GPG del repositorio de Microsoft:</p>
+              <div class="code-block mt-2">
+                <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">sudo mkdir -p /etc/apt/keyrings
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/keyrings/microsoft.gpg > /dev/null</code></pre>
+                <button class="copy-button">Copiar</button>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-stone-800">2. Registrar el repositorio de Microsoft para Debian:</p>
+              <div class="code-block mt-2">
+                <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022 jammy main" | sudo tee /etc/apt/sources.list.d/mssql-server.list</code></pre>
+                <button class="copy-button">Copiar</button>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-stone-800">3. Actualizar la lista de paquetes e instalar SQL Server:</p>
+              <div class="code-block mt-2">
+                                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">sudo apt-get update
+sudo apt-get install -y mssql-server-express</code></pre>
+                <button class="copy-button">Copiar</button>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-stone-800">4. Ejecutar el script de configuración:</p>
+              <p class="text-sm text-stone-600">Sigue las instrucciones para aceptar la licencia, elegir la edición Express e introducir una contraseña segura para el administrador 'SA'.</p>
+              <div class="code-block mt-2">
+                <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">sudo /opt/mssql/bin/mssql-conf setup</code></pre>
+                <button class="copy-button">Copiar</button>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-stone-800">5. Verificar que el servicio esté activo:</p>
+              <div class="code-block mt-2">
+                <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">systemctl status mssql-server.service</code></pre>
+                <button class="copy-button">Copiar</button>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold text-stone-800">6. (Opcional) Instalar herramientas de línea de comandos y conectar:</p>
+              <div class="code-block mt-2">
+                                    <pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code class="language-bash">sudo apt-get install -y mssql-tools unixodbc-dev
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+source ~/.bashrc
+sqlcmd -S localhost -U SA</code></pre>
+                <button class="copy-button">Copiar</button>
+              </div>
+              <p class="mt-2 text-sm text-stone-600">Después de ejecutar el último comando, te pedirá la contraseña que configuraste. Una vez dentro, puedes ejecutar `SELECT @@VERSION;` y luego `GO` para confirmar la conexión.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center mt-12 text-stone-500">
+    <p>¡Felicidades! Has completado el proceso.</p>
+  </footer>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const stepHeaders = document.querySelectorAll('.step-header');
+
+    stepHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const isOpen = content.classList.contains('open');
+
+        document.querySelectorAll('.step-content.open').forEach(openContent => {
+          openContent.classList.remove('open');
+        });
+
+        if (!isOpen) {
+          content.classList.add('open');
+        }
+      });
+    });
+
+    const copyButtons = document.querySelectorAll('.copy-button');
+    copyButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const pre = button.previousElementSibling;
+        const code = pre.querySelector('code');
+        const textToCopy = code.innerText;
+
+        const textArea = document.createElement('textarea');
+        textArea.value = textToCopy;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          button.innerText = '¡Copiado!';
+          setTimeout(() => {
+            button.innerText = 'Copiar';
+          }, 2000);
+        } catch (err) {
+          console.error('Error al copiar el texto: ', err);
+        }
+        document.body.removeChild(textArea);
+      });
+    });
+
+    if (stepHeaders.length > 0) {
+      stepHeaders[0].click();
+    }
+  });
+</script>
+</body>
+</html>

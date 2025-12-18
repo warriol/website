@@ -1,26 +1,36 @@
+Options -Indexes
 <IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-    RewriteRule ^index\.php$ - [L]
+	RewriteEngine On
+	RewriteBase /website
+
+	RewriteCond %{SERVER_PORT} 80
+	RewriteCond %{HTTPS} !on
+	RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,QSA,L]
+
+	RewriteCond %{SCRIPT_FILENAME} !-d
+	RewriteCond %{SCRIPT_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule . /index.php [L]
+
 </IfModule>
 
-DirectoryIndex index.php index.html index.htm
+DirectoryIndex index.php
 ServerSignature On
 
+<Files ~ "^\.(htaccess|htpasswd)$">
+	Require all denied
+</Files>
+
 <Files "config.php">
-    Order Allow,Deny
-    Deny from All
+Order Allow,Deny
+Deny from All
 </Files>
 
-<Files "common.php">
-    Order Allow,Deny
-    Deny from All
+<Files .env>
+    Require all denied
 </Files>
 
-<Files "*.tpl">
-    Order Allow,Deny
-    Deny from All
-</Files>
+<FilesMatch "class\.php|tpl\.tpl">
+  Order allow,deny
+  Deny from all
+</FilesMatch>

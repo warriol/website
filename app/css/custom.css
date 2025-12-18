@@ -1,0 +1,162 @@
+/*--------------------------------------------------------------
+# WhatsApp Floating Button
+--------------------------------------------------------------*/
+
+.whatsapp-float {
+	position: fixed;
+	bottom: 64px;
+	right: 10px;
+	z-index: 1000;
+	width: 60px;
+	height: 60px;
+	background-color: #fff;
+	border-radius: 25%;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+	transform: scale(1.1);
+}
+
+.whatsapp-float img {
+	width: 90px;
+	height: 90px;
+}
+
+/* Add here all your CSS customizations */
+@font-face {
+	font-family: 'Open Sans', sans-serif;
+	src:url(fonts/Open_Sans/OpenSans-Regular.ttf);
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Alegreya', serif;
+	src:url(fonts/Alegreya/Alegreya-Regular.ttf);
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Alegreya SC', serif;
+	src:url(fonts/Alegreya_SC/AlegreyaSC-Regular.ttf);
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Oswald', sans-serif;
+	src:url(fonts/Oswald/Oswald-Regular.ttf);
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* personal */
+.container-red-social {
+	position:fixed;
+	float:right;
+	right: 10px;
+	top:6px;
+	clear:both;
+	z-index:1001;
+}
+
+.contenedor .post {
+	padding-bottom:65px;
+}
+
+.contenedor {
+	margin-bottom:10px;
+}
+li.fondoli-naranja {
+	background: rgb(255,197,120);
+
+	background: rgba(0, 0, 0, 0) linear-gradient(135deg, #fb9d23 19%, #E58220 34%, #fb9d23 49%, #E58220 57%, #fb9d23 73%);
+}
+
+li.fondoli-azul {
+	background: rgb(135, 224, 253);
+	background: rgba(0, 0, 0, 0) linear-gradient(135deg, #2985ac 19%, #2F9CC6 34%, #2985ac 49%, #31A2CE 57%, #2985ac 73%);
+}
+
+li.fondoli-verde {
+	background: rgb(42,175,102);
+	background: linear-gradient(135deg, rgba(42,175,102,1) 19%,rgba(48,201,91,1) 34%,rgba(41,173,76,1) 49%,rgba(49,206,91,1) 57%,rgba(41,173,76,1) 73%);
+}
+
+#header .logo img {
+	filter: invert(0.5);
+	-webkit-filter: invert(0.5);
+}
+
+#footer .social-icons li a:hover i {
+	color: rgb(135, 224, 253) !important;
+}
+
+/* contacto */
+input#contactFormSubmit.btn-primario{
+	background-color:#ccc;
+	color: #fff;
+}
+input#contactFormSubmit.btn-primario:hover {
+	background: linear-gradient(to bottom, rgba(201,222,150,1) 0%,rgba(138,182,107,1) 44%,rgba(57,130,53,1) 100%) !important;
+	border-color:#333 !important;
+}
+
+/* footer */
+#footer {
+	background: url(../img/logos/wda.png) no-repeat #2d343e;
+	background-position: 70px 235px, left top;
+/*	background-image:url(../img/logos/wda.png) */
+	border-top: 4px solid #2d343e;
+	font-size: 0.9em;
+	margin-top: 70px;
+	padding: 80px 0 0;
+	position: relative;
+	clear: both;
+}
+
+@media only screen and (max-width: 990px) {
+	.container-red-social {
+		display:none;
+	}
+	
+	#footer {
+		background-size: 47%;
+		background-position: 17px 3px, left top;
+		border-top: 4px solid #2d343e;
+		font-size: 0.9em;
+		margin-top: 70px;
+		padding: 80px 0 0;
+		position: relative;
+		clear: both;
+	}
+}
+
+/* twitter */
+
+.timeline-Header-title {
+    color: #fff !important;
+}
+
+/* hover a en header */
+#header nav ul.nav-main li:hover > a {
+	/*filter: none;*/
+	color: #2F9CC6;
+	/*
+	border-bottom: 3px solid #000;
+	border-radius: 6px;
+	*/
+}
+
+/* img mia en el timeline */
+
+.img-adaptada{
+	width:100px;
+	height:100px;
+}
