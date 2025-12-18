@@ -14,7 +14,7 @@
 
 									<div class="post-content">
 
-										<h2><a href="blog-post.html">Mantenimiento</a></h2>
+										<h2><a href="#">Mantenimiento</a></h2>
 										<p>El Blog se encuentra en mantenimiento, disculpe las molestias. [...]</p>
 
 										<div class="post-meta">
@@ -35,13 +35,34 @@
 
 									<div class="post-content">
 
-										<h2><a href="blog-post.html">Guía Interactiva de Linux y MySQL</a></h2>
+										<h2><a href="blog/pages/guia_interactiva_linux_mysql.html">Guía Interactiva de Linux y MySQL</a></h2>
 										<p>Explora los fundamentos de Linux y MySQL con esta guía interactiva. Aprende comandos esenciales, administración de bases de datos y mucho más. [...]</p>
 
 										<div class="post-meta">
 											<span><i class="fa fa-user"></i> By <a href="#">Wilson Arriola</a> </span>
 											<span><i class="fa fa-comments"></i> <a href="#">0 Comentarios</a></span>
 											<a class="btn btn-xs btn-primary pull-right" href="blog/pages/guia_interactiva_linux_mysql.html" target="_blank">Leer noticia completa...</a>
+										</div>
+
+									</div>
+								</article>
+
+								<article class="post post-large">
+
+									<div class="post-date">
+										<span class="day">20</span>
+										<span class="month">Oct</span>
+									</div>
+
+									<div class="post-content">
+
+										<h2><a href="blog/pages/guia_interactiva_linux_mssql.html">Guía Interactiva de Linux y MSSQL</a></h2>
+										<p>Explora los fundamentos de Linux y MSSQL con esta guía interactiva. Aprende comandos esenciales, administración de bases de datos y mucho más. [...]</p>
+
+										<div class="post-meta">
+											<span><i class="fa fa-user"></i> By <a href="#">Wilson Arriola</a> </span>
+											<span><i class="fa fa-comments"></i> <a href="#">0 Comentarios</a></span>
+											<a class="btn btn-xs btn-primary pull-right" href="blog/pages/guia_interactiva_linux_mssql.html" target="_blank">Leer noticia completa...</a>
 										</div>
 
 									</div>
